@@ -5,7 +5,7 @@ const port = process.env.PORT || 5000;
 
 
 
-mongoose.connect(process.env.LOCAL_HOST).then(()=>{
+mongoose.connect(process.env.LOCAL_DATABASE).then(()=>{
     console.log('Mongoose is connected')
 })
 
