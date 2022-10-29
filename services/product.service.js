@@ -43,9 +43,27 @@ const updateBulkProductService =async(pData)=>{
     return result;
   }
 
+
+ 
+// delete single product service
+const deleteProductService =async(productId)=>{
+  const result = await Product.deleteOne({_id:productId});
+   return result;
+ }
+
+
+//bulk delete products service
+const bulkDeleteProductService =async(productIds)=>{
+  console.log(productIds)
+  const result = await Product.deleteMany({_id:productIds});
+   return result;
+ }
+
 module.exports={
     getProductService,
     createProductService,
     updateProductService,
-    updateBulkProductService
+    updateBulkProductService,
+    deleteProductService,
+    bulkDeleteProductService
 }
