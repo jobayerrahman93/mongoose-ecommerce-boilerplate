@@ -3,15 +3,24 @@ const { createProductService, getProductService, updateProductService, updateBul
 
 // get products
 const getProducts = async(req,res)=>{
-
+   
     try {
      
      let count =0;
 
+     let  filterQuery = {...req.query};
 
-     const filterQuery = {...req.query}
      const excludeFiles =['sort','page','limit'];
+
+     let filterString = JSON.stringify(filterQuery);
+      filterString = filterString.replace(/\b(gt | gte | lt |lte)\b/g,match=>`$${match}`);
+
+      filterQuery = JSON.parse(filterString); 
+
+      console.log(filterQuery);
+
      excludeFiles.forEach((field)=> delete filterQuery[field]);
+ 
      const queries ={}
    
      if(req.query.sort){
@@ -20,6 +29,11 @@ const getProducts = async(req,res)=>{
 
      if(req.query.fields){
         queries.fields =  req.query.fields.split(',').join(' ');
+    }
+     if(req.query.page){
+        const {page=1,limit=2}= req.query;
+        queries.skip =   (page -1) * parseInt(limit);
+        queries.limit = parseInt(limit)
     }
 
      const result = await getProductService(filterQuery,queries);

@@ -2,12 +2,12 @@ const Product = require('../models/product');
 
 const getProductService=async(filterQueries,queries)=>{
   // const products = Product.find().where('price').lt(100);
-  // console.log(req.query);
- 
 
-
-
-  const products = await Product.find(filterQueries).select(queries.fields).sort(queries.sortBy);
+  const products = await Product.find(filterQueries)
+  .skip(queries.skip)
+  .limit(queries.limit)
+  .select(queries.fields)
+  .sort(queries.sortBy);
   return products;
 }
 
