@@ -7,7 +7,22 @@ const getProducts = async(req,res)=>{
     try {
      
      let count =0;
-     const result = await getProductService();
+
+
+     const filterQuery = {...req.query}
+     const excludeFiles =['sort','page','limit'];
+     excludeFiles.forEach((field)=> delete filterQuery[field]);
+     const queries ={}
+   
+     if(req.query.sort){
+         queries.sortBy =  req.query.sort.split(',').join(' ');
+     }
+
+     if(req.query.fields){
+        queries.fields =  req.query.fields.split(',').join(' ');
+    }
+
+     const result = await getProductService(filterQuery,queries);
      count = result.length;
      res.status(200).json({
          success:true,

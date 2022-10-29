@@ -1,8 +1,13 @@
 const Product = require('../models/product');
 
-const getProductService=async()=>{
+const getProductService=async(filterQueries,queries)=>{
   // const products = Product.find().where('price').lt(100);
-  const products = await Product.find().where('price');
+  // console.log(req.query);
+ 
+
+
+
+  const products = await Product.find(filterQueries).select(queries.fields).sort(queries.sortBy);
   return products;
 }
 
@@ -54,7 +59,7 @@ const deleteProductService =async(productId)=>{
 
 //bulk delete products service
 const bulkDeleteProductService =async(productIds)=>{
-  console.log(productIds)
+
   const result = await Product.deleteMany({_id:productIds});
    return result;
  }
