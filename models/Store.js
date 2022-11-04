@@ -2,36 +2,28 @@ const { default: mongoose } = require("mongoose");
 const validator = require('validator');
 const {ObjectId} = mongoose.Schema.Types;
 
-const brandSchema = mongoose.Schema({
+const storeSchema = mongoose.Schema({
     name:{
         type:String,
         trim:true,
         required: [true,'provide prouduct name'],
-        maxLength:100,
         unique: true,
         lowercase:true,
     },
     description: String,
-    email:{
-        type:String,
-        lowercase: true,
-        validate:[validator.isEmail,"Please provide a valid email"]
-    },
+
     website:{
         type:String,
         validate:[validator.isUrl,'Please provide a valid website']
     },
-    location:String,
-    products:[{
-        type:ObjectId,
-        ref:"Product"
-    }],
-    suppliers:[{
+
+   
+    manager:[{
         name:String,
         contactNumber:String,
         id:{
             type:ObjectId,
-            ref:"Supplier"
+            ref:"User"
         }
     }],
     status:{
@@ -45,6 +37,6 @@ const brandSchema = mongoose.Schema({
 
 
 
-const Brand = mongoose.model("Brand",brandSchema);
+const Store = mongoose.model("Store",storeSchema);
 
-module.exports = Brand
+module.exports = Store;
