@@ -30,8 +30,25 @@ const storeSchema = mongoose.Schema({
         type:String,
         enum:['active','inactive'],
         default:"active"
+    }, 
+    category:{
+        type:String,
+        required:true
+    },
+    brand:{
+        name:{
+           type: String,
+            required:true
+        },
+        id:{
+           type:ObjectId,
+           ref:"Brand",
+           required:true
+        }
     }
-},{
+}
+
+,{
     timestamps:true
 });
 

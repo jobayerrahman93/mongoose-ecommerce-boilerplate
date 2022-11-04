@@ -6,6 +6,7 @@ const productSchema = mongoose.Schema({
     name:{
         type: String,
         required:[true,'provide product name'],
+        lowercase:true,
         trim:true,
         minLength:[3,'name must be atleast 3 characters'],
         maxLength:[200,'name is too large'],
@@ -14,56 +15,36 @@ const productSchema = mongoose.Schema({
         type:String,
         required: [true,'provide description']
     },
-    price:{
-        type:Number,
-        required: true,
-        min:[0,'price cannot be negative']
-    },
     unit:{
         type:String,
         required: true,
         enum:{
-            values:['kg','litre','pcs'],
-            message:"unit value can't be {VALUE}, must be kg/litre/pcs"
+            values:['kg','litre','pcs','bag'],
+            message:"unit value can't be {VALUE}, must be kg/litre/pcs/bag"
         }
     },
-    quantity:{
+    imgUrls:[{
         type:Number,
         required:true,
-        min:0,
         validate:{
-            validator:(val)=>{
-                    const isInteger = Number.isInteger(val);
-                    if(isInteger){
-                        return true
-                    }
-                    else{
-                        return false
-                    }
+            validator:(value)=>{
+                    
+                if(!Array.isArray(value)){
+                    return false
+                }
+                let isValid = true;
+                 value.forEach(img=>{
+                        if(!validator.isUrl(img)){
+                            isValid=false
+                        }
+                 });
+
+                 return isValid
             }
         },
-        message:"Quantity must be an integer"
-    },
-    status:{
-        type:String,
-        required:true,
-        enum:{
-            values:['in-stock','out-of-stock','discontinued'],
-            message:"status  can't be {VALUE}, must be in-stock/out-of-stock/discontinued"
-
-        }
-    },
-    // supplier:{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:"Supplier"
-    // },
-    // categories:[{
-    //     name: {
-    //         type:String,
-    //         required:true
-    //     },
-    //     _id: mongoose.Schema.Types.ObjectId
-    // }]
+        message:"Please provide valid image urls"
+    }]
+   
 
 },{
     Timestamp:true
