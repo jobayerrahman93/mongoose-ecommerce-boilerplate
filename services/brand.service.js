@@ -16,11 +16,22 @@ const getBrandServiceById= async(id)=>{
     const result = await Brand.find({_id:id})
     return result;
 }
+const updateBrandServiceById= async (brandId,data)=>{
+   
+    const result = await Brand.updateOne({_id:brandId},data,{
+        runValidators:true
+    });
+ 
+    return result;
+}
+
+
 
 
 
 module.exports={
     BrandPostService,
     getBrandService,
-    getBrandServiceById
+    getBrandServiceById,
+    updateBrandServiceById
 }

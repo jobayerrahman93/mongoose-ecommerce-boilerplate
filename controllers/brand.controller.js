@@ -1,4 +1,4 @@
-const  {BrandPostService, getBrandService, getBrandServiceById} = require("../services/brand.service");
+const  {BrandPostService, getBrandService, getBrandServiceById, updateBrandServiceById} = require("../services/brand.service");
 
 
 const createBrand =async(req,res)=>{
@@ -53,5 +53,32 @@ const getBrandById =async(req,res)=>{
    }
 
 }
+const updateBrandById =async(req,res)=>{
 
-module.exports = {createBrand,getBrand,getBrandById};
+   try {
+    const result = await updateBrandServiceById(req.params.id,req.body);
+
+  if(!result.modifiedCount){
+    res.status(400).json({
+        success: false,
+        message:`Couldn't update single brand with this id`,
+
+    });
+  }else{
+    res.status(200).json({
+        success: true,
+        message:'Brand successfully updated',
+    });
+  }
+
+   } catch (err) {
+    res.status(400).json({
+        success: false,
+        message:`Couldn't update single brand ${err.message}`,
+
+    });
+   }
+
+}
+
+module.exports = {createBrand,getBrand,getBrandById,updateBrandById};

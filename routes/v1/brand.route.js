@@ -1,4 +1,4 @@
-const  { getBrand, createBrand, getBrandById}  = require('../../controllers/brand.controller');
+const  { getBrand, createBrand, getBrandById, updateBrandById}  = require('../../controllers/brand.controller');
 
 const router = require('express').Router();
 
@@ -7,7 +7,9 @@ router.route('/')
 .post(createBrand);
 
 
-router.route('/:id').get(getBrandById)
+router.route('/:id')
+.get(getBrandById)
+.patch(updateBrandById)
 
 
 module.exports = router;
