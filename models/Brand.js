@@ -6,6 +6,10 @@ const brandSchema = mongoose.Schema({
     name:{
         type:String,
         trim:true,
+        enum:{
+            values:["dhaka","bogura","rajshahi"],
+            message: "{VALUE} is not a valid name"
+        },
         required: [true,'provide prouduct name'],
         maxLength:100,
         unique: true,
