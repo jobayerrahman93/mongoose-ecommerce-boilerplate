@@ -12,12 +12,12 @@ const categorySchema = mongoose.Schema({
     },
     description: String,
     imageUrl:{
-       
-        validate:[validator.isUrl,"Please provide a valid image url"]
+       type:String,
+        validate:[validator.isURL,"Please provide a valid image url"]
     },
     website:{
         type:String,
-        validate:[validator.isUrl,'Please provide a valid website']
+        validate:[validator.isURL,'Please provide a valid website']
     },
     location:String,
     products:[{

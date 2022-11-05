@@ -18,7 +18,7 @@ const storeSchema = mongoose.Schema({
 
     website:{
         type:String,
-        validate:[validator.isUrl,'Please provide a valid website']
+        validate:[validator.isURL,'Please provide a valid website']
     },
 
    

@@ -35,7 +35,7 @@ const productSchema = mongoose.Schema({
                 }
                 let isValid = true;
                  value.forEach(img=>{
-                        if(!validator.isUrl(img)){
+                        if(!validator.isURL(img)){
                             isValid=false
                         }
                  });
