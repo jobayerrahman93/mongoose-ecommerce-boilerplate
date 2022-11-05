@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const productRouter = require('./routes/v1/product.route');
+const brandRouter = require('./routes/v1/brand.route');
 
 
 // middleware
@@ -10,6 +11,7 @@ app.use(express.json());
 
 // router
 app.use('/api/v1/product', productRouter);
+app.use('/api/v1/brand', brandRouter);
 
 
 app.get('/',(req,res)=>{

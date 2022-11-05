@@ -1,4 +1,6 @@
 const Product = require('../models/product');
+const validator = require('validator');
+
 
 const getProductService=async(filterQueries,queries)=>{
   // const products = Product.find().where('price').lt(100);
