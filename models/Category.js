@@ -15,15 +15,6 @@ const categorySchema = mongoose.Schema({
        type:String,
         validate:[validator.isURL,"Please provide a valid image url"]
     },
-    website:{
-        type:String,
-        validate:[validator.isURL,'Please provide a valid website']
-    },
-    location:String,
-    products:[{
-        type:ObjectId,
-        ref:"Product"
-    }],
     
 },{
     timestamps:true

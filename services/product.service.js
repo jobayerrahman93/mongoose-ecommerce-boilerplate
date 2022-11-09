@@ -1,5 +1,6 @@
 const Product = require('../models/product');
 const validator = require('validator');
+const Brand = require('../models/Brand');
 
 
 const getProductService=async(filterQueries,queries)=>{
@@ -14,9 +15,22 @@ const getProductService=async(filterQueries,queries)=>{
 }
 
 const  createProductService =async(data)=>{
-    const product = new Product(data); 
-   const result = await product.save();
-    return result;
+  //   const product = new Product(data); 
+  //  const result = await product.save();
+  const product = await Product.create(data);
+  console.log(product,'product');
+
+  const {_id:productId,brand}= product;
+
+ const res = await Brand.updateOne({_id:brand.id},
+  {$push:{products:productId}}
+  );
+
+
+  console.log(res);
+
+
+    return product;
   }
 
   // update single product

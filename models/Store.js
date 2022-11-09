@@ -15,12 +15,6 @@ const storeSchema = mongoose.Schema({
         lowercase:true,
     },
     description: String,
-
-    website:{
-        type:String,
-        validate:[validator.isURL,'Please provide a valid website']
-    },
-
    
     manager:[{
         name:String,
@@ -35,21 +29,7 @@ const storeSchema = mongoose.Schema({
         enum:['active','inactive'],
         default:"active"
     }, 
-    category:{
-        type:String,
-        required:true
-    },
-    brand:{
-        name:{
-           type: String,
-            required:true
-        },
-        id:{
-           type:ObjectId,
-           ref:"Brand",
-           required:true
-        }
-    }
+   
 }
 
 ,{

@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 const validator = require('validator');
 
@@ -44,7 +45,23 @@ const productSchema = mongoose.Schema({
             }
         },
         message:"Please provide valid image urls"
-    }]
+    }],
+    brand:{
+        name:{
+            type:String,
+            required: true,
+        },
+        id:{
+            type:ObjectId,
+            ref: "Brand",
+            required:true
+        }
+
+    },
+    category:{
+        type:String,
+        required:true
+    }
    
 
 },{

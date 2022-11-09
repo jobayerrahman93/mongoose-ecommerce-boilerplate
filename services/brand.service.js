@@ -7,7 +7,7 @@ const BrandPostService= async(data)=>{
 }
 
 const getBrandService= async()=>{
-    const result = await Brand.find({}).select(['-products','-suppliers']);
+    const result = await Brand.find({}).populate('products');
     return result;
 }
 

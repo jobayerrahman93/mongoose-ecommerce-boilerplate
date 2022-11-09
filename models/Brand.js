@@ -22,6 +22,7 @@ const brandSchema = mongoose.Schema({
         validate:[validator.isURL,'Please provide a valid website']
     },
     location:String,
+    
     products:[{
         type:ObjectId,
         ref:"Product"
@@ -34,6 +35,7 @@ const brandSchema = mongoose.Schema({
             ref:"Supplier"
         }
     }],
+    
     status:{
         type:String,
         enum:['active','inactive'],

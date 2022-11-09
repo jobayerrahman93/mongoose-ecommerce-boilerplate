@@ -68,7 +68,6 @@ const saveProduct = async(req,res)=>{
         res.status(200).json({
           success:true,
           message:'Data inserted successfully',
-          data:result
           
         });
     } catch (err) {
@@ -184,13 +183,35 @@ const bulkDeleteProducts = async(req,res)=>{
     }
     }
 
+
+
+    const productImageUpload = async(req,res)=>{
+        try {
+      
+            // const result = await bulkDeleteProductService(req.body.ids);
+        
+            res.status(200).json({
+              success:true,
+              message:'Product image uploaded successfully',
+              data:req.file
+              
+            });
+        } catch (err) {
+            res.status(400).json({
+                success:false,
+                message:'Product image upload failed',
+                message:err.message
+            })
+        }
+        }
 module.exports={
         saveProduct,
         getProducts,
         updateProduct,
         BulkUpdateProduct,
         deleteProductById,
-        bulkDeleteProducts
+        bulkDeleteProducts,
+        productImageUpload
 
     
     }
