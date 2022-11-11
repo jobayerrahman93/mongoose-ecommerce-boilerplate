@@ -15,8 +15,8 @@ const getSupplierServiceById= async(id)=>{
     return result;
 }
 
-const updateSupplierServiceById= async (brandId,data)=>{
-    const result = await Supplier.updateOne({_id:brandId},data,{
+const updateSupplierServiceById= async (supplierId,data)=>{
+    const result = await Supplier.updateOne({_id:supplierId},data,{
         runValidators:true
     });
  

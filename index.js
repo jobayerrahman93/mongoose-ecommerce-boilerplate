@@ -6,6 +6,7 @@ const brandRouter = require('./routes/v1/brand.route');
 const storeRouter = require('./routes/v1/store.route');
 const catergoryRouter = require('./routes/v1/category.route');
 const supplierRouter = require('./routes/v1/supplier.route');
+const stockRouter = require('./routes/v1/stock.route');
 
 
 
@@ -19,6 +20,7 @@ app.use('/api/v1/brand', brandRouter);
 app.use('/api/v1/category', catergoryRouter);
 app.use('/api/v1/store', storeRouter);
 app.use('/api/v1/supplier', supplierRouter);
+app.use('/api/v1/stock', stockRouter);
 
 
 app.get('/',(req,res)=>{

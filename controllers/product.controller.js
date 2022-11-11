@@ -17,8 +17,6 @@ const getProducts = async(req,res)=>{
 
       filterQuery = JSON.parse(filterString); 
 
-      console.log(filterQuery);
-
      excludeFiles.forEach((field)=> delete filterQuery[field]);
  
      const queries ={}

@@ -16,7 +16,6 @@ const stockSchema = mongoose.Schema({
         required:[true,'provide a name for this product'],
         lowercase:true,
         trim:true,
-        unique:true,
         minLength:[3,'name must be atleast 3 characters'],
         maxLength:[200,'name is too large'],
     },
@@ -32,26 +31,9 @@ const stockSchema = mongoose.Schema({
             message:"unit value can't be {VALUE}, must be kg/litre/pcs/bag"
         }
     },
-    imgUrls:[{ 
-        type:Number,
-        required:true,
-        validate:{
-            validator:(value)=>{
-                    
-                if(!Array.isArray(value)){
-                    return false
-                }
-                let isValid = true;
-                 value.forEach(img=>{
-                        if(!validator.isURL(img)){
-                            isValid=false
-                        }
-                 });
-
-                 return isValid
-            }
-        },
-        message:"Please provide valid image urls"
+    imgUrls:[{
+        type:String,
+       validate:  [validator.isURL,"Please provide valid image urls"]
     }],
     price:{
         type:Number,
@@ -116,6 +98,12 @@ const stockSchema = mongoose.Schema({
             ref:"Supplier",
             required:true
         }
+    },
+    sellCount:{
+        type:Number,
+        default:0,
+        min:0
+
     }
    
 
