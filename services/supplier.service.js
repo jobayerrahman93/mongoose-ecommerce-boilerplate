@@ -11,7 +11,7 @@ const getSupplierService= async()=>{
 }
 
 const getSupplierServiceById= async(id)=>{
-    const result = await Supplier.find({_id:id}).populate('Brand');
+    const result = await Supplier.find({_id:id});
     return result;
 }
 
