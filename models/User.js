@@ -29,7 +29,7 @@ const userSchema = mongoose.Schema({
         required:[true,'Confirm password is required'],
         validate:{
             validator:function (value){
-                  return  value == this.password
+                  return  value === this.password
             },
             message:'password does not match'
         }
@@ -52,6 +52,8 @@ const userSchema = mongoose.Schema({
         validate:[validator.isMobilePhone,'provide right phone number']
     },
     shippingAddress:String,
+    presentAddress:String,
+    permanentAddress:String,
     imageURL:{
         type:String,
         validate:[validator.isURL,'provide right image utl']
@@ -71,10 +73,9 @@ const userSchema = mongoose.Schema({
 
 
 userSchema.pre('save',function (next){
-
-
+  const salt = 10;
   const password = this.password;
-  const hashPassword = bcrypt.hash(password);
+  const hashPassword = bcrypt.hashSync(password, salt);
 
   this.password = hashPassword;
   this.confirmPassword= undefined;
@@ -83,10 +84,18 @@ userSchema.pre('save',function (next){
 
 });
 
+
+// compare method in schema
+
+userSchema.methods.comparePassword=function (password,hash){
+
+    const isPasswordValid = bcrypt.compareSync(password,hash)
+    return isPasswordValid;
+}
+
+
+
 const User = mongoose.model('User',userSchema);
-
-
-
 
 
 module.exports= User;
