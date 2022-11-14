@@ -95,8 +95,34 @@ try {
 }
 
 
+const getMe = async(req,res)=>{
+
+    try {
+
+        const user = await userFindService(req.user?.email);
+
+        res.status(200).json({
+            success:true,
+            data:user
+        });
+
+
+
+        
+    } catch (err) {
+        res.status(403).json({
+            success:false,
+            info:err.message
+        });
+        
+    }
+
+}
+
+
 
 module.exports={
     signup,
-    login
+    login,
+    getMe
 }
